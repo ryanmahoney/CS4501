@@ -85,16 +85,13 @@
 (define (nvalue-tag tv) (car tv))
 (define (nvalue-val tv) (cdr tv))
 
+
 (define (return val)
        (lambda (curr_counter)
          (make-numbered-value curr_counter val)))
 
          
-(define (>>= m f) (lambda (curr_counter) 
-(define ((m_result (m curr_counter)) 
-(define (n1 (nvalue-tag m_result)) 
-(define (v (nvalue-val m_result)) (m1 (f v))  
-(m1 n1))))))) 
+(define (>>= m f) (lambda (curr_counter)   ((f (m) (curr_counter))))) 
 
 (define incr (lambda (n) (make-numbered-value (+ 1 n) n)))
 
