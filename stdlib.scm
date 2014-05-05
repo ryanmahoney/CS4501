@@ -80,3 +80,34 @@
 (define (or . lst)          (fold || #f lst))
 (define (any? pred . lst)   (apply or (map pred lst)))
 (define (every? pred . lst) (apply and (map pred lst)))
+
+(define (make-numbered-value tag val) (cons tag val))
+(define (nvalue-tag tv) (car tv))
+(define (nvalue-val tv) (cdr tv))
+
+(define (return val)
+       (lambda (curr_counter)
+         (make-numbered-value curr_counter val)))
+
+         
+(define (>>= m f) (lambda (curr_counter) 
+(define ((m_result (m curr_counter)) 
+(define (n1 (nvalue-tag m_result)) 
+(define (v (nvalue-val m_result)) (m1 (f v))  
+(m1 n1))))))) 
+
+(define incr (lambda (n) (make-numbered-value (+ 1 n) n)))
+
+(define (runM m init-counter) m init-counter)
+
+(define (make-node val kids)
+       (>>=
+        incr
+        (lambda (counter)
+          (return (cons (make-numbered-value counter val) kids)))))
+		  
+(define (build-btree depth)
+       (if (zero? depth) (make-node depth '())
+           (define ((left-branch (build-btree (- depth 1)))
+                   (define (right-branch (build-btree (- depth 1))))
+                  (make-node depth (list left-branch right-branch)))))) 
