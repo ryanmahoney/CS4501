@@ -98,16 +98,4 @@
 
 (define incr (lambda (n) (make-numbered-value (+ 1 n) n)))
 
-(define (runM m init-counter) m init-counter)
-
-(define (make-node val kids)
-       (>>=
-        incr
-        (lambda (counter)
-          (return (cons (make-numbered-value counter val) kids)))))
-		  
-(define (build-btree depth)
-       (if (zero? depth) (make-node depth '())
-           (define ((left-branch (build-btree (- depth 1)))
-                   (define (right-branch (build-btree (- depth 1))))
-                  (make-node depth (list left-branch right-branch)))))) 
+(define (runM m init-counter) (m init-counter))
