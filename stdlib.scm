@@ -91,7 +91,11 @@
          (make-numbered-value curr_counter val)))
 
          
-(define (>>= m f) (lambda (curr_counter)   ((f (m) (curr_counter))))) 
+(define (>>= m f)
+       (lambda (curr_counter)
+         (lambda (m_result) (lambda (n1) (lambda (v) 
+		 (lambda (m1 (f v))) (nvalue-val m_result)) (nvalue-tag m_result))                   
+               (m1 n1) (m curr_counter))))                        
 
 (define incr (lambda (n) (make-numbered-value (+ 1 n) n)))
 
